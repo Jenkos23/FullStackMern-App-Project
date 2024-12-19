@@ -10,6 +10,10 @@ router.post('/register', async (req, res) =>{
 
 
     try {
+         // Check if the data exists (optional validation)
+        if (!name || !email || !password) {
+            return res.status(400).json({ message: 'All fields are required' });
+        }
 
 
         //Save to MongoDB
@@ -18,7 +22,7 @@ router.post('/register', async (req, res) =>{
         res.status(201).json(newUser).send('User Created sucessfully');
 
     } catch (error) {
-        res.status(400).json({message: error.message});
+        res.status(400).json({message:'Server error while creating user',error: error.message});
         
     }
 });
