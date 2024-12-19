@@ -6,34 +6,20 @@ const router = express.Router();
 
 //CREATE -Adding a new user
 router.post('/register', async (req, res) =>{
-    console.log(req.body);
     const {name, email, password} = req.body;
 
 
-   
-    // Input Validation
-    if (!name || !email || !password) {
-        return res.status(400).json({ message: 'All fields are required' });
-    }
-
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        return res.status(400).json({ message: 'Invalid email format' });
-    }
-
-    // Create a new user instance
-    const newUser = new User({ name, email, password });
-
     try {
-        // Save to MongoDB
+
+
+        //Save to MongoDB
+        const newUser = new User({name, email, password});
         await newUser.save();
-        
-        // Return a success response
-        return res.status(201).json({ message: 'User created successfully', user: newUser });
+        res.status(201).json(newUser).send('User Created sucessfully');
+
     } catch (error) {
-        console.error('Error occurred while saving user:', error); // Log the error for debugging
-        return res.status(500).json({ message: 'Internal Server Error', error: error.message });
+        res.status(400).json({message: error.message});
+        
     }
 });
 

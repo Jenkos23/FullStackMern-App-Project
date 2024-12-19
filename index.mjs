@@ -9,15 +9,6 @@ dotenv.config();
 
 const app = express();
 
-//CORS Middleware
-// const allowedOrigins = ['http://localhost:5173', 'http://localhost:5000', 'https://fullstackmern-app-project.onrender.com/users']
-// const corsWare = {
-//     origin: allowedOrigins ,
-//     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-//     credentials: true,
-
-// }
-
 
 //Usage of CORS middleware with the corsWare
 app.use(cors());
